@@ -1,32 +1,89 @@
+from __future__ import annotations
+
 import json
 from datetime import datetime
+from math import isfinite
 from pathlib import Path
-from typing import Any, Optional
-
-# Supports normal Python files and browser-based Python runners.
-try:
-    BASE_DIR = Path(__file__).resolve().parent
-except NameError:
-    BASE_DIR = Path.cwd()
-
-DATA_FILE = BASE_DIR / "expenses.json"
+from typing import Final, TypedDict, cast
 
 
-def load_expenses() -> list[dict[str, Any]]:
-    """Load saved expenses from the JSON file."""
+class Expense(TypedDict):
+    """Structure of one expense record."""
+
+    description: str
+    category: str
+    amount: float
+    date: str
+
+
+def get_base_dir() -> Path:
+    """Return the folder containing this Python file."""
+
+    try:
+        return Path(__file__).resolve().parent
+    except NameError:
+        return Path.cwd()
+
+
+# Assigned only once, so Pylance will not report constant redefinition.
+BASE_DIR: Final[Path] = get_base_dir()
+DATA_FILE: Final[Path] = BASE_DIR / "expenses.json"
+
+
+def parse_expense(value: object) -> Expense | None:
+    """Validate one expense loaded from the JSON file."""
+
+    if not isinstance(value, dict):
+        return None
+
+    data = cast(dict[object, object], value)
+
+    description = data.get("description")
+    category = data.get("category")
+    amount = data.get("amount")
+    date_value = data.get("date")
+
+    if not isinstance(description, str) or not description.strip():
+        return None
+
+    if not isinstance(category, str) or not category.strip():
+        return None
+
+    if (
+        isinstance(amount, bool)
+        or not isinstance(amount, (int, float))
+        or not isfinite(float(amount))
+        or amount <= 0
+    ):
+        return None
+
+    if not isinstance(date_value, str):
+        return None
+
+    try:
+        valid_date = datetime.strptime(date_value, "%Y-%m-%d")
+    except ValueError:
+        return None
+
+    expense: Expense = {
+        "description": description.strip(),
+        "category": category.strip().title(),
+        "amount": round(float(amount), 2),
+        "date": valid_date.strftime("%Y-%m-%d"),
+    }
+
+    return expense
+
+
+def load_expenses() -> list[Expense]:
+    """Load and validate saved expenses from the JSON file."""
 
     if not DATA_FILE.exists():
         return []
 
     try:
         with DATA_FILE.open("r", encoding="utf-8") as file:
-            data = json.load(file)
-
-        if isinstance(data, list):
-            return data
-
-        print("Invalid expense data found. Starting with an empty list.")
-        return []
+            raw_data = cast(object, json.load(file))
 
     except json.JSONDecodeError:
         print("The expenses file contains invalid JSON.")
@@ -37,8 +94,31 @@ def load_expenses() -> list[dict[str, Any]]:
         print(f"Unable to read the expenses file: {error}")
         return []
 
+    if not isinstance(raw_data, list):
+        print("Invalid expense data found.")
+        print("Starting with an empty expense list.")
+        return []
 
-def save_expenses(expenses: list[dict[str, Any]]) -> bool:
+    raw_items = cast(list[object], raw_data)
+
+    expenses: list[Expense] = []
+    invalid_records = 0
+
+    for item in raw_items:
+        expense = parse_expense(item)
+
+        if expense is None:
+            invalid_records += 1
+        else:
+            expenses.append(expense)
+
+    if invalid_records:
+        print(f"Ignored {invalid_records} invalid expense record(s).")
+
+    return expenses
+
+
+def save_expenses(expenses: list[Expense]) -> bool:
     """Save expenses to the JSON file."""
 
     try:
@@ -57,25 +137,26 @@ def save_expenses(expenses: list[dict[str, Any]]) -> bool:
         return False
 
 
-def get_valid_amount() -> Optional[float]:
+def get_valid_amount() -> float | None:
     """Receive and validate an expense amount."""
 
     value = input("Enter the amount: ₹").strip()
 
     try:
         amount = float(value)
+
     except ValueError:
         print("Please enter a valid numeric amount.")
         return None
 
-    if amount <= 0:
-        print("The amount must be greater than zero.")
+    if not isfinite(amount) or amount <= 0:
+        print("The amount must be a finite number greater than zero.")
         return None
 
     return round(amount, 2)
 
 
-def get_valid_date() -> Optional[str]:
+def get_valid_date() -> str | None:
     """Receive and validate a date in YYYY-MM-DD format."""
 
     date_value = input(
@@ -87,14 +168,15 @@ def get_valid_date() -> Optional[str]:
 
     try:
         valid_date = datetime.strptime(date_value, "%Y-%m-%d")
-        return valid_date.strftime("%Y-%m-%d")
 
     except ValueError:
         print("Invalid date. Please use the YYYY-MM-DD format.")
         return None
 
+    return valid_date.strftime("%Y-%m-%d")
 
-def add_expense(expenses: list[dict[str, Any]]) -> None:
+
+def add_expense(expenses: list[Expense]) -> None:
     """Add a new expense."""
 
     print("\nADD NEW EXPENSE")
@@ -122,7 +204,8 @@ def add_expense(expenses: list[dict[str, Any]]) -> None:
     if expense_date is None:
         return
 
-    new_expense = {
+    # Explicit Expense type removes the partially unknown dictionary error.
+    new_expense: Expense = {
         "description": description,
         "category": category,
         "amount": amount,
@@ -133,26 +216,28 @@ def add_expense(expenses: list[dict[str, Any]]) -> None:
 
     if save_expenses(expenses):
         print("\nExpense added successfully.")
+
     else:
         expenses.pop()
         print("The expense could not be saved.")
 
 
-def display_expenses(expenses: list[dict[str, Any]]) -> None:
+def display_expenses(expenses: list[Expense]) -> None:
     """Display all recorded expenses."""
 
     if not expenses:
         print("\nNo expenses are available.")
         return
 
-    sorted_expenses = sorted(
+    sorted_expenses: list[Expense] = sorted(
         expenses,
-        key=lambda expense: str(expense.get("date", "")),
+        key=lambda expense: expense["date"],
         reverse=True,
     )
 
     print("\nALL EXPENSES")
     print("=" * 82)
+
     print(
         f"{'No.':<5}"
         f"{'Date':<14}"
@@ -160,24 +245,20 @@ def display_expenses(expenses: list[dict[str, Any]]) -> None:
         f"{'Description':<28}"
         f"{'Amount':>15}"
     )
+
     print("-" * 82)
 
     total = 0.0
 
     for index, expense in enumerate(sorted_expenses, start=1):
-        amount = float(expense.get("amount", 0))
-        total += amount
-
-        date = str(expense.get("date", "Unknown"))
-        category = str(expense.get("category", "Other"))
-        description = str(expense.get("description", "Untitled"))
+        total += expense["amount"]
 
         print(
             f"{index:<5}"
-            f"{date:<14}"
-            f"{category[:16]:<18}"
-            f"{description[:26]:<28}"
-            f"₹{amount:>13.2f}"
+            f"{expense['date']:<14}"
+            f"{expense['category'][:16]:<18}"
+            f"{expense['description'][:26]:<28}"
+            f"₹{expense['amount']:>13.2f}"
         )
 
     print("-" * 82)
@@ -185,9 +266,7 @@ def display_expenses(expenses: list[dict[str, Any]]) -> None:
     print("=" * 82)
 
 
-def display_category_summary(
-    expenses: list[dict[str, Any]],
-) -> None:
+def display_category_summary(expenses: list[Expense]) -> None:
     """Display total expenses grouped by category."""
 
     if not expenses:
@@ -197,11 +276,11 @@ def display_category_summary(
     category_totals: dict[str, float] = {}
 
     for expense in expenses:
-        category = str(expense.get("category", "Other"))
-        amount = float(expense.get("amount", 0))
+        category = expense["category"]
 
         category_totals[category] = (
-            category_totals.get(category, 0.0) + amount
+            category_totals.get(category, 0.0)
+            + expense["amount"]
         )
 
     print("\nCATEGORY SUMMARY")
@@ -220,9 +299,7 @@ def display_category_summary(
     print("=" * 50)
 
 
-def display_monthly_summary(
-    expenses: list[dict[str, Any]],
-) -> None:
+def display_monthly_summary(expenses: list[Expense]) -> None:
     """Display total expenses grouped by month."""
 
     if not expenses:
@@ -232,21 +309,14 @@ def display_monthly_summary(
     monthly_totals: dict[str, float] = {}
 
     for expense in expenses:
-        date_value = str(expense.get("date", ""))
+        month_key = datetime.strptime(
+            expense["date"],
+            "%Y-%m-%d",
+        ).strftime("%Y-%m")
 
-        try:
-            parsed_date = datetime.strptime(
-                date_value,
-                "%Y-%m-%d",
-            )
-            month = parsed_date.strftime("%B %Y")
-        except ValueError:
-            month = "Unknown Date"
-
-        amount = float(expense.get("amount", 0))
-
-        monthly_totals[month] = (
-            monthly_totals.get(month, 0.0) + amount
+        monthly_totals[month_key] = (
+            monthly_totals.get(month_key, 0.0)
+            + expense["amount"]
         )
 
     print("\nMONTHLY SUMMARY")
@@ -256,9 +326,17 @@ def display_monthly_summary(
 
     grand_total = 0.0
 
-    for month, amount in monthly_totals.items():
+    for month_key in sorted(monthly_totals, reverse=True):
+        amount = monthly_totals[month_key]
+
+        month_name = datetime.strptime(
+            month_key,
+            "%Y-%m",
+        ).strftime("%B %Y")
+
         grand_total += amount
-        print(f"{month:<32}₹{amount:>16.2f}")
+
+        print(f"{month_name:<32}₹{amount:>16.2f}")
 
     print("-" * 50)
     print(f"{'Grand Total':<32}₹{grand_total:>16.2f}")
@@ -266,28 +344,30 @@ def display_monthly_summary(
 
 
 def get_expense_index(
-    expenses: list[dict[str, Any]],
-) -> Optional[int]:
+    expenses: list[Expense],
+) -> int | None:
     """Receive and validate an expense number."""
 
     try:
         expense_number = int(
             input("\nEnter the expense number: ").strip()
         )
+
     except ValueError:
         print("Please enter a valid number.")
         return None
 
     if expense_number < 1 or expense_number > len(expenses):
         print(
-            f"Please enter a number between 1 and {len(expenses)}."
+            f"Please enter a number between 1 and "
+            f"{len(expenses)}."
         )
         return None
 
     return expense_number - 1
 
 
-def delete_expense(expenses: list[dict[str, Any]]) -> None:
+def delete_expense(expenses: list[Expense]) -> None:
     """Delete a selected expense."""
 
     if not expenses:
@@ -298,15 +378,10 @@ def delete_expense(expenses: list[dict[str, Any]]) -> None:
     print("-" * 70)
 
     for index, expense in enumerate(expenses, start=1):
-        description = str(
-            expense.get("description", "Untitled")
-        )
-        amount = float(expense.get("amount", 0))
-        date = str(expense.get("date", "Unknown"))
-
         print(
-            f"{index}. {description} | "
-            f"{date} | ₹{amount:.2f}"
+            f"{index}. {expense['description']} | "
+            f"{expense['date']} | "
+            f"₹{expense['amount']:.2f}"
         )
 
     expense_index = get_expense_index(expenses)
@@ -317,7 +392,7 @@ def delete_expense(expenses: list[dict[str, Any]]) -> None:
     selected_expense = expenses[expense_index]
 
     confirmation = input(
-        f"Delete '{selected_expense.get('description')}'? "
+        f"Delete '{selected_expense['description']}'? "
         "(y/n): "
     ).strip().lower()
 
@@ -329,9 +404,10 @@ def delete_expense(expenses: list[dict[str, Any]]) -> None:
 
     if save_expenses(expenses):
         print(
-            "Deleted expense: "
-            f"{removed_expense.get('description', 'Untitled')}"
+            f"Deleted expense: "
+            f"{removed_expense['description']}"
         )
+
     else:
         expenses.insert(expense_index, removed_expense)
         print("The expense could not be deleted.")

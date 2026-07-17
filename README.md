@@ -26,8 +26,9 @@ The repository will continue to grow as I learn new Python, SQL, REST API, autom
 
 | No. | Project | Description | Concepts |
 |---|---|---|---|
-| 01 | [Command-Line Task Manager](./01-task-manager) | A menu-driven application for adding, viewing, completing, deleting, and saving tasks | Python, JSON, file handling, functions, exception handling, type hints |
-| 02 | [Command-Line Expense Tracker](./02-expense-tracker) | An expense-management application with category and monthly summaries | Python, JSON, datetime, calculations, sorting, validation, exception handling |
+| 01 | [Command-Line Task Manager](./01-task-manager) | A menu-driven application for adding, viewing, completing, deleting and saving tasks | Python, JSON, file handling, functions, exception handling, type hints |
+| 02 | [Command-Line Expense Tracker](./02-expense-tracker) | An expense-management application with category-wise and monthly summaries | Python, JSON, datetime, calculations, sorting, validation, exception handling |
+| 03 | [Contact Management System](./03-contact-management-system) | A contact manager for adding, viewing, searching, editing and deleting contact records | Python, JSON, regular expressions, CRUD, searching, validation, TypedDict |
 
 ---
 
@@ -96,6 +97,44 @@ Read the complete documentation:
 
 [View Expense Tracker README](./02-expense-tracker/README.md)
 
+---
+
+## Project 03: Contact Management System
+
+The Contact Management System is a command-line application for creating, organising, searching, updating and deleting contact records.
+
+### Features
+
+- Add contacts with name, phone number, email and address
+- View all saved contacts
+- Search by name, phone number, email or address
+- Edit existing contact details
+- Delete contacts with confirmation
+- Validate phone numbers and email addresses
+- Prevent duplicate phone numbers and email addresses
+- Display basic contact statistics
+- Store records locally using JSON
+- Validate data loaded from JSON
+- Handle missing, corrupted and invalid data safely
+- Use strict type annotations compatible with Pylance
+
+### Run the project
+
+```bash
+cd 03-contact-management-system
+python contact_manager.py
+```
+
+On some systems:
+
+```bash
+python3 contact_manager.py
+```
+
+Read the complete documentation:
+
+[View Contact Management System README](./03-contact-management-system/README.md)
+
 ## Skills Demonstrated
 
 The projects in this repository demonstrate and strengthen knowledge of:
@@ -126,39 +165,26 @@ python-mini-projects/
 │   ├── task_manager.py
 │   └── README.md
 │
+├── 02-expense-tracker/
+│   ├── expense_tracker.py
+│   └── README.md
+│
+├── 03-contact-management-system/
+│   ├── contact_manager.py
+│   └── README.md
+│
 ├── .gitignore
 ├── LICENSE
 └── README.md
 ```
 
-The `tasks.json` file inside the Task Manager folder is created automatically when the first task is saved.
-
----
-
-## Repository Structure
-
-```text
-python-mini-projects/
-│
-├── 01-task-manager/
-│   ├── task_manager.py
-│   └── README.md
-│
-├── 02-expense-tracker/
-│   ├── expense_tracker.py
-│   └── README.md
-│
-├── .gitignore
-├── LICENSE
-└── README.md
-
+The JSON data files are created automatically when users save their first records.
 ---
 
 ## Planned Projects
 
 More projects will be added gradually, including:
 
-- Contact Management System
 - Password Generator
 - Quiz Application
 - Library Management System

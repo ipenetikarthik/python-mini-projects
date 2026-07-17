@@ -27,6 +27,7 @@ The repository will continue to grow as I learn new Python, SQL, REST API, autom
 | No. | Project | Description | Concepts |
 |---|---|---|---|
 | 01 | [Command-Line Task Manager](./01-task-manager) | A menu-driven application for adding, viewing, completing, deleting, and saving tasks | Python, JSON, file handling, functions, exception handling, type hints |
+| 02 | [Command-Line Expense Tracker](./02-expense-tracker) | An expense-management application with category and monthly summaries | Python, JSON, datetime, calculations, sorting, validation, exception handling |
 
 ---
 
@@ -60,6 +61,40 @@ Read the complete documentation:
 [View Task Manager README](./01-task-manager/README.md)
 
 ---
+
+## Project 02: Command-Line Expense Tracker
+
+The Python Expense Tracker is a menu-driven application for recording, viewing, analysing, and deleting expense information.
+
+### Features
+
+- Add expenses with description, category, amount, and date
+- Automatically use the current date when no date is entered
+- View all saved expense records
+- Calculate total spending
+- Generate category-wise summaries
+- Generate monthly summaries
+- Delete expenses with confirmation
+- Store records using JSON
+- Validate amounts, dates, menu options, and expense numbers
+- Handle file and JSON-related errors
+
+### Run the project
+
+```bash
+cd 02-expense-tracker
+python expense_tracker.py
+```
+
+On some systems:
+
+```bash
+python3 expense_tracker.py
+```
+
+Read the complete documentation:
+
+[View Expense Tracker README](./02-expense-tracker/README.md)
 
 ## Skills Demonstrated
 
@@ -100,11 +135,29 @@ The `tasks.json` file inside the Task Manager folder is created automatically wh
 
 ---
 
+## Repository Structure
+
+```text
+python-mini-projects/
+│
+├── 01-task-manager/
+│   ├── task_manager.py
+│   └── README.md
+│
+├── 02-expense-tracker/
+│   ├── expense_tracker.py
+│   └── README.md
+│
+├── .gitignore
+├── LICENSE
+└── README.md
+
+---
+
 ## Planned Projects
 
 More projects will be added gradually, including:
 
-- Expense Tracker
 - Contact Management System
 - Password Generator
 - Quiz Application
@@ -116,7 +169,6 @@ More projects will be added gradually, including:
 - Flask REST API
 - Database-Based Task Manager
 - User Authentication System
-
 ---
 
 ## Learning Goals

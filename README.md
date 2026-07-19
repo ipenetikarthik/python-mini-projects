@@ -28,7 +28,8 @@ The repository will continue to grow as I learn new Python, SQL, REST API, autom
 |---|---|---|---|
 | 01 | [Command-Line Task Manager](./01-task-manager) | A menu-driven application for adding, viewing, completing, deleting and saving tasks | Python, JSON, file handling, functions, exception handling, type hints |
 | 02 | [Command-Line Expense Tracker](./02-expense-tracker) | An expense-management application with category-wise and monthly summaries | Python, JSON, datetime, calculations, sorting, validation, exception handling |
-| 03 | [Contact Management System](./03-contact-management-system) | A contact manager for adding, viewing, searching, editing and deleting contact records | Python, JSON, regular expressions, CRUD, searching, validation, TypedDict |
+| 03 | [Contact Management System](./03-contact-management-system) | A contact manager for adding, viewing, searching, editing and deleting records | Python, JSON, regular expressions, CRUD, validation, TypedDict |
+| 04 | [Secure Password Generator](./04-password-generator) | A customizable password generator with secure randomness and strength analysis | Python, secrets, dataclasses, security, validation, password analysis |
 
 ---
 
@@ -135,6 +136,51 @@ Read the complete documentation:
 
 [View Contact Management System README](./03-contact-management-system/README.md)
 
+---
+
+## Project 04: Secure Password Generator
+
+The Secure Password Generator is a command-line application for creating strong and customizable passwords using cryptographically secure randomness.
+
+It also includes a password-strength checker that evaluates length, character diversity, common patterns, predictable sequences and repeated characters.
+
+### Features
+
+- Generate cryptographically secure passwords
+- Customize password length
+- Include lowercase letters
+- Include uppercase letters
+- Include numbers
+- Include symbols
+- Exclude ambiguous characters
+- Generate multiple passwords
+- Guarantee inclusion of selected character groups
+- Securely shuffle generated characters
+- Evaluate password strength
+- Detect common password patterns
+- Detect alphabetical and numerical sequences
+- Detect repeated characters
+- Provide security recommendations
+- Validate all user inputs
+- Use strict Pylance-compatible type annotations
+
+### Run the project
+
+```bash
+cd 04-password-generator
+python password_generator.py
+```
+
+On some systems:
+
+```bash
+python3 password_generator.py
+```
+
+Read the complete documentation:
+
+[View Secure Password Generator README](./04-password-generator/README.md)
+
 ## Skills Demonstrated
 
 The projects in this repository demonstrate and strengthen knowledge of:
@@ -173,19 +219,22 @@ python-mini-projects/
 │   ├── contact_manager.py
 │   └── README.md
 │
+├── 04-password-generator/
+│   ├── password_generator.py
+│   └── README.md
+│
 ├── .gitignore
 ├── LICENSE
 └── README.md
 ```
 
-The JSON data files are created automatically when users save their first records.
+JSON data files are created automatically by projects that require persistent local storage. The Password Generator does not save generated passwords.
 ---
 
 ## Planned Projects
 
 More projects will be added gradually, including:
 
-- Password Generator
 - Quiz Application
 - Library Management System
 - Student Record Management System

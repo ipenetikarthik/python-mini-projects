@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Locally generated quiz scores
+05-quiz-application/high_scores.json

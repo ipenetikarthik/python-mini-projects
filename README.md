@@ -19,7 +19,6 @@ This repository contains Python mini projects developed as part of my continuous
 Each project focuses on applying programming concepts to practical problems. The projects are organized into separate folders and include source code, instructions, feature explanations, usage examples, and future enhancement ideas.
 
 The repository will continue to grow as I learn new Python, SQL, REST API, automation, testing, and backend-development concepts.
-
 ---
 
 ## Projects
@@ -28,9 +27,9 @@ The repository will continue to grow as I learn new Python, SQL, REST API, autom
 |---|---|---|---|
 | 01 | [Command-Line Task Manager](./01-task-manager) | A menu-driven application for adding, viewing, completing, deleting and saving tasks | Python, JSON, file handling, functions, exception handling, type hints |
 | 02 | [Command-Line Expense Tracker](./02-expense-tracker) | An expense-management application with category-wise and monthly summaries | Python, JSON, datetime, calculations, sorting, validation, exception handling |
-| 03 | [Contact Management System](./03-contact-management-system) | A contact manager for adding, viewing, searching, editing and deleting records | Python, JSON, regular expressions, CRUD, validation, TypedDict |
+| 03 | [Contact Management System](./03-contact-management-system) | A contact manager supporting search, validation, duplicate prevention and complete CRUD operations | Python, JSON, regular expressions, CRUD, validation, TypedDict |
 | 04 | [Secure Password Generator](./04-password-generator) | A customizable password generator with secure randomness and strength analysis | Python, secrets, dataclasses, security, validation, password analysis |
-
+| 05 | [Python Quiz Application](./05-quiz-application) | A category-based quiz application with randomized questions, grading, explanations and high-score tracking | Python, JSON, random sampling, dataclasses, TypedDict, validation, file handling |
 ---
 
 ## Project 01: Command-Line Task Manager
@@ -181,6 +180,50 @@ Read the complete documentation:
 
 [View Secure Password Generator README](./04-password-generator/README.md)
 
+---
+
+## Project 05: Python Quiz Application
+
+The Python Quiz Application is a command-line program that loads multiple-choice questions from JSON and allows users to customize their quiz by category, difficulty and question count.
+
+It provides immediate answer feedback, explanations, score calculation, grading, incorrect-answer review and local high-score tracking.
+
+### Features
+
+- Load questions from a JSON file
+- Validate all question records
+- Select categories and difficulty levels
+- Choose the number of questions
+- Randomize questions for every attempt
+- Display quiz progress
+- Validate answer input
+- Show immediate answer feedback
+- Display correct-answer explanations
+- Calculate score and percentage
+- Assign performance grades
+- Review incorrect answers
+- Store the ten best scores locally
+- Reload questions without restarting
+- Handle missing and corrupted files
+- Use strict Pylance-compatible type annotations
+
+### Run the project
+
+```bash
+cd 05-quiz-application
+python quiz_app.py
+```
+
+On some systems:
+
+```bash
+python3 quiz_app.py
+```
+
+Read the complete documentation:
+
+[View Python Quiz Application README](./05-quiz-application/README.md)
+
 ## Skills Demonstrated
 
 The projects in this repository demonstrate and strengthen knowledge of:
@@ -223,9 +266,17 @@ python-mini-projects/
 │   ├── password_generator.py
 │   └── README.md
 │
+├── 05-quiz-application/
+│   ├── quiz_app.py
+│   ├── questions.json
+│   └── README.md
+│
 ├── .gitignore
 ├── LICENSE
 └── README.md
+```
+
+Local JSON files such as task data, expense records and quiz high scores are created automatically when required and are excluded from version control where appropriate.
 ```
 
 JSON data files are created automatically by projects that require persistent local storage. The Password Generator does not save generated passwords.
@@ -235,7 +286,6 @@ JSON data files are created automatically by projects that require persistent lo
 
 More projects will be added gradually, including:
 
-- Quiz Application
 - Library Management System
 - Student Record Management System
 - Weather API Application

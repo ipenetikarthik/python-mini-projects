@@ -1,0 +1,338 @@
+[
+    {
+        "id": 1,
+        "category": "Python",
+        "difficulty": "Easy",
+        "question": "Which keyword is used to define a function in Python?",
+        "options": [
+            "function",
+            "define",
+            "def",
+            "func"
+        ],
+        "correct_answer": 3,
+        "explanation": "Python uses the def keyword to define a function."
+    },
+    {
+        "id": 2,
+        "category": "Python",
+        "difficulty": "Easy",
+        "question": "Which Python data type stores key-value pairs?",
+        "options": [
+            "List",
+            "Tuple",
+            "Set",
+            "Dictionary"
+        ],
+        "correct_answer": 4,
+        "explanation": "A dictionary stores information as key-value pairs."
+    },
+    {
+        "id": 3,
+        "category": "Python",
+        "difficulty": "Medium",
+        "question": "What is the output of len([10, 20, 30, 40])?",
+        "options": [
+            "3",
+            "4",
+            "10",
+            "40"
+        ],
+        "correct_answer": 2,
+        "explanation": "The list contains four elements, so len() returns 4."
+    },
+    {
+        "id": 4,
+        "category": "Python",
+        "difficulty": "Hard",
+        "question": "Which Python feature produces values lazily instead of storing all values in memory at once?",
+        "options": [
+            "Generator",
+            "Dictionary",
+            "Decorator",
+            "Class variable"
+        ],
+        "correct_answer": 1,
+        "explanation": "Generators yield values one at a time and can reduce memory usage."
+    },
+    {
+        "id": 5,
+        "category": "SQL",
+        "difficulty": "Easy",
+        "question": "Which SQL command is used to retrieve records from a table?",
+        "options": [
+            "SELECT",
+            "INSERT",
+            "UPDATE",
+            "DELETE"
+        ],
+        "correct_answer": 1,
+        "explanation": "The SELECT command retrieves records from one or more database tables."
+    },
+    {
+        "id": 6,
+        "category": "SQL",
+        "difficulty": "Easy",
+        "question": "Which SQL clause filters rows before they are returned?",
+        "options": [
+            "ORDER BY",
+            "WHERE",
+            "GROUP BY",
+            "JOIN"
+        ],
+        "correct_answer": 2,
+        "explanation": "The WHERE clause filters rows based on a specified condition."
+    },
+    {
+        "id": 7,
+        "category": "SQL",
+        "difficulty": "Medium",
+        "question": "Which JOIN returns only rows that have matching values in both tables?",
+        "options": [
+            "LEFT JOIN",
+            "RIGHT JOIN",
+            "FULL JOIN",
+            "INNER JOIN"
+        ],
+        "correct_answer": 4,
+        "explanation": "INNER JOIN returns records that have matching values in both joined tables."
+    },
+    {
+        "id": 8,
+        "category": "SQL",
+        "difficulty": "Hard",
+        "question": "Which SQL window function assigns a unique sequential number to every row?",
+        "options": [
+            "RANK()",
+            "DENSE_RANK()",
+            "ROW_NUMBER()",
+            "COUNT()"
+        ],
+        "correct_answer": 3,
+        "explanation": "ROW_NUMBER() assigns a unique sequential number to each row in the result."
+    },
+    {
+        "id": 9,
+        "category": "Git",
+        "difficulty": "Easy",
+        "question": "Which Git command creates a new local repository?",
+        "options": [
+            "git start",
+            "git init",
+            "git create",
+            "git new"
+        ],
+        "correct_answer": 2,
+        "explanation": "The git init command initializes a new local Git repository."
+    },
+    {
+        "id": 10,
+        "category": "Git",
+        "difficulty": "Easy",
+        "question": "Which Git command shows changed, staged and untracked files?",
+        "options": [
+            "git status",
+            "git show",
+            "git log",
+            "git branch"
+        ],
+        "correct_answer": 1,
+        "explanation": "The git status command displays the current state of the working directory and staging area."
+    },
+    {
+        "id": 11,
+        "category": "Git",
+        "difficulty": "Medium",
+        "question": "Which command stages all changed and untracked files in the current repository?",
+        "options": [
+            "git commit -a",
+            "git add .",
+            "git push",
+            "git clone"
+        ],
+        "correct_answer": 2,
+        "explanation": "The git add . command stages changes from the current directory and its subdirectories."
+    },
+    {
+        "id": 12,
+        "category": "Git",
+        "difficulty": "Hard",
+        "question": "What does git rebase primarily do?",
+        "options": [
+            "Deletes all previous commits",
+            "Moves or reapplies commits onto another base commit",
+            "Uploads files to GitHub",
+            "Creates a new remote repository"
+        ],
+        "correct_answer": 2,
+        "explanation": "Git rebase reapplies commits on top of another base commit to create a cleaner history."
+    },
+    {
+        "id": 13,
+        "category": "REST API",
+        "difficulty": "Easy",
+        "question": "Which HTTP method is commonly used to retrieve data from an API?",
+        "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ],
+        "correct_answer": 1,
+        "explanation": "The GET method is commonly used to retrieve data without modifying the resource."
+    },
+    {
+        "id": 14,
+        "category": "REST API",
+        "difficulty": "Easy",
+        "question": "Which HTTP status code commonly indicates that a resource was created successfully?",
+        "options": [
+            "200",
+            "201",
+            "400",
+            "404"
+        ],
+        "correct_answer": 2,
+        "explanation": "HTTP 201 Created indicates that a new resource was successfully created."
+    },
+    {
+        "id": 15,
+        "category": "REST API",
+        "difficulty": "Medium",
+        "question": "Which HTTP method is generally used to partially update an existing resource?",
+        "options": [
+            "GET",
+            "POST",
+            "PATCH",
+            "OPTIONS"
+        ],
+        "correct_answer": 3,
+        "explanation": "PATCH is generally used to apply partial modifications to an existing resource."
+    },
+    {
+        "id": 16,
+        "category": "REST API",
+        "difficulty": "Hard",
+        "question": "Which statement best describes an idempotent HTTP operation?",
+        "options": [
+            "It must always return JSON",
+            "Repeating it has the same intended effect as performing it once",
+            "It can only be used by authenticated users",
+            "It always creates a new resource"
+        ],
+        "correct_answer": 2,
+        "explanation": "An idempotent operation has the same intended server-side effect when repeated."
+    },
+    {
+        "id": 17,
+        "category": "Programming Fundamentals",
+        "difficulty": "Easy",
+        "question": "What is a variable in programming?",
+        "options": [
+            "A named location used to store a value",
+            "A programming error",
+            "A database table",
+            "A network request"
+        ],
+        "correct_answer": 1,
+        "explanation": "A variable is a named reference or storage location used to hold a value."
+    },
+    {
+        "id": 18,
+        "category": "Programming Fundamentals",
+        "difficulty": "Easy",
+        "question": "Which structure repeatedly executes a block of code?",
+        "options": [
+            "Variable",
+            "Loop",
+            "Class",
+            "Comment"
+        ],
+        "correct_answer": 2,
+        "explanation": "A loop repeatedly executes a block of code while its condition or iteration rules apply."
+    },
+    {
+        "id": 19,
+        "category": "Programming Fundamentals",
+        "difficulty": "Medium",
+        "question": "Why is a base case required in a recursive function?",
+        "options": [
+            "To increase memory usage",
+            "To create a database connection",
+            "To stop recursive calls",
+            "To import another module"
+        ],
+        "correct_answer": 3,
+        "explanation": "A base case stops recursion and prevents the function from calling itself indefinitely."
+    },
+    {
+        "id": 20,
+        "category": "Programming Fundamentals",
+        "difficulty": "Hard",
+        "question": "What does O(n) time complexity generally mean?",
+        "options": [
+            "Execution time remains constant",
+            "Execution time grows linearly with the input size",
+            "Execution time grows logarithmically",
+            "The algorithm never finishes"
+        ],
+        "correct_answer": 2,
+        "explanation": "O(n) describes linear growth, where the work generally increases in proportion to the input size."
+    },
+    {
+        "id": 21,
+        "category": "Data Structures",
+        "difficulty": "Easy",
+        "question": "Which data structure follows the Last In, First Out principle?",
+        "options": [
+            "Queue",
+            "Stack",
+            "Graph",
+            "Tree"
+        ],
+        "correct_answer": 2,
+        "explanation": "A stack follows Last In, First Out, meaning the most recently added item is removed first."
+    },
+    {
+        "id": 22,
+        "category": "Data Structures",
+        "difficulty": "Easy",
+        "question": "Which data structure follows the First In, First Out principle?",
+        "options": [
+            "Stack",
+            "Set",
+            "Queue",
+            "Tree"
+        ],
+        "correct_answer": 3,
+        "explanation": "A queue follows First In, First Out, meaning the earliest added item is removed first."
+    },
+    {
+        "id": 23,
+        "category": "Data Structures",
+        "difficulty": "Medium",
+        "question": "Which data structure stores elements as nodes connected by edges?",
+        "options": [
+            "Graph",
+            "Array",
+            "String",
+            "Tuple"
+        ],
+        "correct_answer": 1,
+        "explanation": "A graph contains vertices or nodes connected by edges."
+    },
+    {
+        "id": 24,
+        "category": "Data Structures",
+        "difficulty": "Hard",
+        "question": "What is the average lookup time of a well-designed hash table?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "O(n squared)",
+            "O(log n squared)"
+        ],
+        "correct_answer": 1,
+        "explanation": "A well-designed hash table provides average-case constant-time lookup, represented as O(1)."
+    }
+]

@@ -1,14 +1,14 @@
 # Python Mini Projects
 
-### Practical Python applications built through consistent project-based learning
+<p align="center">
+  A growing collection of practical Python projects created to strengthen programming, problem-solving, file-handling, database, API, and backend-development skills.
+</p>
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite&logoColor=white)
-![Projects](https://img.shields.io/badge/Completed_Projects-6-success)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-</div>
-
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Projects-Learning%20Portfolio-brightgreen" alt="Portfolio">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License">
+</p>
 ---
 
 ## About This Repository
